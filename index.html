@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./image/favicon.jpeg" />
+    <title>ContactHub - Smart Contact Manager</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/all.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="ambient-background">
+      <div class="ambient-blob ambient-blob--blue"></div>
+      <div class="ambient-blob ambient-blob--violet"></div>
+      <div class="ambient-blob ambient-blob--mint"></div>
+    </div>
+
+    <header class="site-header sticky-top">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between site-header__inner">
+          <div class="d-flex align-items-center gap-3">
+            <div class="brand-mark"><i class="fa-solid fa-address-book"></i></div>
+            <div>
+              <h1 class="brand-name">Contact<span>Hub</span></h1>
+              <p class="brand-caption d-none d-sm-block">Smart Contact Manager</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 gap-sm-3">
+            <button id="openContactFormButton" class="button-primary-gradient" type="button">
+              <i class="fa-solid fa-plus"></i>
+              <span class="d-none d-sm-inline">Add Contact</span><span class="d-sm-none">Add</span>
+            </button>
+            <button class="header-icon-button d-none d-sm-flex" type="button">
+              <i class="fa-solid fa-bell"></i>
+            </button>
+            <button class="header-icon-button d-none d-sm-flex" type="button">
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <div class="profile-avatar">
+              <img src="./image/avatar.jpg" alt="Profile" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main-pad">
+      <section id="dashboardStats" class="margin-bottom-compact">
+        <div class="row g-3 g-sm-4 dashboard-stats"></div>
+      </section>
+      <div class="d-flex layout-gap-large">
+        <div class="flex-fill min-width-zero">
+          <section id="contactsHeading" class="mb-4">
+            <div class="margin-bottom-compact">
+              <h2 class="section-title">All Contacts</h2>
+              <p class="section-subtitle">Manage your personal and professional connections</p>
+            </div>
+            <div class="contact-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                id="contactSearchInput"
+                type="text"
+                placeholder="Search by name, phone, or email..."
+                aria-label="Search contacts" />
+            </div>
+          </section>
+          <section id="contactsGrid"><div class="row g-3 contact-grid"></div></section>
+        </div>
+
+        <div class="sidebar-panels d-none d-xl-block">
+          <section id="favoriteContactsPanel" class="sidebar-panel margin-bottom-compact">
+            <div class="sidebar-panel__header sidebar-panel__header--amber">
+              <div class="d-flex align-items-center gap-3">
+                <div class="sidebar-panel__icon sidebar-icon--amber"><i class="fa-solid fa-star"></i></div>
+                <div>
+                  <h2>Favorites</h2>
+                  <p>Quick access to starred contacts</p>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-panel__body"></div>
+          </section>
+          <section id="emergencyContactsPanel" class="sidebar-panel">
+            <div class="sidebar-panel__header sidebar-panel__header--rose">
+              <div class="d-flex align-items-center gap-3">
+                <div class="sidebar-panel__icon sidebar-icon--rose"><i class="fa-solid fa-heart-pulse"></i></div>
+                <div>
+                  <h2>Emergency</h2>
+                  <p>Important contacts for urgent calls</p>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-panel__body"></div>
+          </section>
+        </div>
+      </div>
+
+      <div class="d-xl-none mt-5">
+        <section id="favoriteContactsPanelMobile" class="sidebar-panel margin-bottom-compact">
+          <div class="sidebar-panel__header sidebar-panel__header--compact sidebar-panel__header--amber">
+            <div class="d-flex align-items-center gap-3">
+              <div class="sidebar-panel__icon sidebar-panel__icon--small sidebar-icon--amber">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div>
+                <h2 class="sidebar-panel__title--small">Favorites</h2>
+                <p class="sidebar-panel__caption--small">Quick access</p>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-panel__body sidebar-panel__body--mobile-grid"></div>
+        </section>
+        <section id="emergencyContactsPanelMobile" class="sidebar-panel">
+          <div class="sidebar-panel__header sidebar-panel__header--compact sidebar-panel__header--rose">
+            <div class="d-flex align-items-center gap-3">
+              <div class="sidebar-panel__icon sidebar-panel__icon--small sidebar-icon--rose">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <div>
+                <h2 class="sidebar-panel__title--small">Emergency</h2>
+                <p class="sidebar-panel__caption--small">Urgent contacts</p>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-panel__body sidebar-panel__body--mobile-grid"></div>
+        </section>
+      </div>
+    </main>
+
+    <div
+      id="contactEditorDialog"
+      class="contact-dialog d-none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contactEditorTitle">
+      <div class="contact-dialog__backdrop" id="contactEditorBackdrop"></div>
+      <div class="contact-dialog__center">
+        <div class="contact-dialog__card">
+          <div class="contact-dialog__header">
+            <h2 id="contactEditorTitle">Add New Contact</h2>
+            <button id="closeContactEditorButton" class="dialog-close-button" type="button" aria-label="Close">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <form id="contactEditorForm" class="contact-form" novalidate>
+            <div class="d-flex flex-column align-items-center gap-3 pb-2">
+              <div id="contactPhotoPreview" class="contact-form__avatar-preview"><i class="fa-solid fa-user"></i></div>
+              <label class="contact-form__photo-button"
+                ><i class="fa-solid fa-camera"></i><span>Change Photo</span
+                ><input type="file" id="contactPhotoInput" accept="image/*" hidden
+              /></label>
+              <input type="hidden" id="contactPhotoData" value="" />
+            </div>
+            <div class="form-field">
+              <label for="contactFullName">Full Name <span class="required-mark">*</span></label
+              ><input type="text" id="contactFullName" placeholder="Enter full name" class="form-control-custom" />
+              <p id="contactFullNameError" class="form-error d-none">
+                Name should contain only letters and spaces (2-50 characters)
+              </p>
+            </div>
+            <div class="form-field">
+              <label for="contactPhoneNumber">Phone Number <span class="required-mark">*</span></label
+              ><input type="text" id="contactPhoneNumber" placeholder="e.g., 01012345678" class="form-control-custom" />
+              <p id="contactPhoneNumberError" class="form-error d-none">Please enter a valid Egyptian phone number</p>
+            </div>
+            <div class="form-field">
+              <label for="contactEmailAddress">Email Address</label
+              ><input type="text" id="contactEmailAddress" placeholder="name@example.com" class="form-control-custom" />
+              <p id="contactEmailAddressError" class="form-error d-none">Please enter a valid email address</p>
+            </div>
+            <div class="form-field">
+              <label for="contactStreetAddress">Address</label
+              ><input type="text" id="contactStreetAddress" placeholder="Enter address" class="form-control-custom" />
+            </div>
+            <div class="form-field">
+              <label for="contactCategory">Group</label
+              ><select id="contactCategory" class="form-control-custom form-control-custom--select">
+                <option value="">Select a group</option>
+                <option value="family">Family</option>
+                <option value="friends">Friends</option>
+                <option value="work">Work</option>
+                <option value="school">School</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="contactNotesField">Notes</label
+              ><textarea
+                id="contactNotesField"
+                rows="2"
+                placeholder="Add notes about this contact"
+                class="form-control-custom form-control-custom--no-resize"></textarea>
+            </div>
+            <div class="d-flex flex-container gap-3 py-2">
+              <label class="form-check-custom"
+                ><input type="checkbox" id="markAsFavorite" class="chk-fav" /><span
+                  ><i class="fa-solid fa-star icon-text--amber"></i>Favorite</span
+                ></label
+              ><label class="form-check-custom"
+                ><input type="checkbox" id="markAsEmergency" class="chk-em" /><span
+                  ><i class="fa-solid fa-heart-pulse icon-text--rose"></i>Emergency</span
+                ></label
+              >
+            </div>
+            <div class="d-flex flex-column-reverse flex-sm-row gap-3 pt-2">
+              <button type="button" id="cancelContactEditorButton" class="button-secondary">Cancel</button
+              ><button type="submit" class="button-save"><i class="fa-solid fa-check me-2"></i>Save Contact</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
